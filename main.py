@@ -1,5 +1,5 @@
 from core_modules import Bot_response
-from tools import pifi ,print_response
+from tools import pifi
 
 
 def __init__():
