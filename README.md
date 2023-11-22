@@ -28,6 +28,13 @@ This repository houses a simple yet effective chat bot implementation. The chat 
 - Project Management
 - Troubleshooting and Debugging
 
+## Installation
+
+Install my-project with npm
+
+```bash
+  pip install -r requirements.txt
+```
 
 ## Deployment
 
@@ -38,13 +45,6 @@ python .\main.py
 ```
 
 
-## Installation
-
-Install my-project with npm
-
-```bash
-  pip install -r requirements.txt
-```
     
 ## Authors
 

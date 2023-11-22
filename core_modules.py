@@ -2,8 +2,9 @@ import re
 import response_dataset as res
 
 
-
-def calculate_probability(user_input, targeted_words, high_priority = False, required_words=[]):
+def calculate_probability(
+    user_input, targeted_words, high_priority=False, required_words=[]
+):
     message_certainty = 0
     has_required_words = True
 
@@ -31,11 +32,13 @@ def calculate_probability(user_input, targeted_words, high_priority = False, req
 def verify_match(user_input):
     match_probability = {}
 
-    def response(bot_response, targeted_words, high_priority = False, required_words=[]):
+    def response(bot_response, targeted_words, high_priority=False, required_words=[]):
         nonlocal match_probability
-        match_probability[bot_response] = calculate_probability(user_input, targeted_words,high_priority, required_words) 
-        
-        '''
+        match_probability[bot_response] = calculate_probability(
+            user_input, targeted_words, high_priority, required_words
+        )
+
+        """
                         ____
                        / __ \___  _________  ____  ____  ________
                       / /_/ / _ \/ ___/ __ \/ __ \/ __ \/ ___/ _ \
@@ -43,15 +46,34 @@ def verify_match(user_input):
                     /_/ |_|\___/____/ .___/\____/_/ /_/____/\___/
                                     /_/
 
-        '''
-    response(res.greetings_responses(), ['hello', 'hi', 'hey', 'sup', 'heyo'], high_priority=True)
-    response(res.farewells_responses(), ['bye', 'goodbye',], high_priority=True)
-    response('I\'m doing fine, and you?', ['how', 'are', 'you', 'doing'], required_words=['how'])
-    response('You\'re welcome!', ['thank', 'thanks'], high_priority=True)
-    response('Thank you!', ['i', 'love', 'code', 'palace'], required_words=['code', 'palace'])
+        """
+
+    response(
+        res.greetings_responses(),
+        ["hello", "hi", "hey", "sup", "heyo"],
+        high_priority=True,
+    )
+    response(
+        res.farewells_responses(),
+        [
+            "bye",
+            "goodbye",
+        ],
+        high_priority=True,
+    )
+    response(
+        "I'm doing fine, and you?",
+        ["how", "are", "you", "doing"],
+        required_words=["how"],
+    )
+    response("You're welcome!", ["thank", "thanks"], high_priority=True)
+    response(
+        "Thank you!", ["i", "love", "code", "palace"], required_words=["code", "palace"]
+    )
 
     best_match = max(match_probability, key=match_probability.get)
     return res.unknown() if match_probability[best_match] < 1 else best_match
+
 
 def Bot_response(user_input):
     split_message = re.split(r"\s+|[,;?!.-]\s*", user_input.lower())
