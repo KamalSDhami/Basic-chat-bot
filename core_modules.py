@@ -1,6 +1,6 @@
 import re
 import response_dataset as res
-
+from tools import pifi, Bot_log, Get_date, Get_time
 
 def calculate_probability(
     user_input, targeted_words, high_priority=False, required_words=[]
@@ -79,3 +79,17 @@ def Bot_response(user_input):
     split_message = re.split(r"\s+|[,;?!.-]\s*", user_input.lower())
     response = verify_match(split_message)
     return response
+
+
+def Start_chat(log = False):
+    if log:
+        pifi("Chat Bot")
+        while True:
+            user_input = input("You: ")
+            response = Bot_response(user_input)
+            print("Bot: " + response)
+            Bot_log(user_input,response,Get_date(),Get_time())
+    else:
+        pifi("Chat Bot")
+        while True:
+            print("Bot: " + Bot_response(input("You: ")))

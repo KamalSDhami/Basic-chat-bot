@@ -1,12 +1,6 @@
-from core_modules import Bot_response
-from tools import pifi
-
+from core_modules import Start_chat
 
 # Start the Chat Bot
 def __init__():
-    pifi("Chat Bot")
-    while True:
-        print("Bot: " + Bot_response(input("You: ")))
-
-
+    Start_chat( log = False)
 __init__()
